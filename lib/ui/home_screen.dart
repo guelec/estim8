@@ -268,7 +268,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  Text(obj[index].text),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(obj[index].text)),
                   Switch(
                       activeColor: Colors.black,
                       value: obj[index].isSwitched,

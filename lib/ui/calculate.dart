@@ -17,6 +17,40 @@ class _CalculateState extends State<Calculate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: Stack(
+          children: <Widget>[
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: FloatingActionButton(
+                  backgroundColor: Colors.black,
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/optimization");
+                  },
+                  child: Icon(
+                    Icons.settings,
+                    color: Colors.yellow,
+                  ),
+                ),
+              ),
+            ),
+            Align(
+                alignment: Alignment.bottomRight,
+                child: FloatingActionButton.extended(
+                  backgroundColor: Colors.black,
+                  onPressed: () {
+                    Navigator.pushNamed(context, "/help");
+                  },
+                  label: Text(
+                    "Mali ve Teknik Destek",
+                    style: TextStyle(
+                      color: Colors.yellow,
+                    ),
+                  ),
+                ))
+          ],
+        ),
         appBar: AppBar(
             backgroundColor: Colors.black, title: Text("Hesaplama Sonuçları")),
         body: SafeArea(
