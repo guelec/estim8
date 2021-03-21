@@ -32,11 +32,98 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Container(
+            color: Colors.grey.withOpacity(0.1),
             child: Column(
               children: [
+                //
                 Text("Project Cost = ${project.cost}Lira"),
+                headerView("Platform",
+                    "Uygulamanızı yayınlayacağınız platformları seçiniz."),
                 platformView(),
-                appSizeView()
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Uygulama Boyutu",
+                    "Uygulamanızın içereceği tahmini sayfa sayısını seçiniz."),
+                appSizeView(),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Arayüz Tasarımı",
+                    "Uygulamanızın ihtiyaç duygu arayüzün seviyesini seçiniz."),
+                view(userInterface),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Kimlik Doğrulama",
+                    "Kullanıcılarınızın uygulamaya giriş yapması durumunda kullanıcakları doğrulama yöntemini seçiniz."),
+                view(authentication),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("İçerik",
+                    "Uygulamanızın içerisinde bulunabilecek içerik seçeneklerinden uygun olanları seçiniz."),
+                view(content),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Konum ve Tarih",
+                    "Uygulamanızın içerisinde bulunabilecek konum ve tarih seçeneklerinden uygun olanları seçiniz."),
+                view(dateNLocation),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Ödemeler",
+                    "Uygulamanızın içerisinde bulunabilecek ödeme seçeneklerinden uygun olanları seçiniz."),
+                view(billing),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Bağlantı",
+                    "Uygulamanızın içerisinde bulunabilecek bağlantı seçeneklerinden uygun olanları seçiniz."),
+                view(connection),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Güvenlik",
+                    "Uygulamanızın içerisinde bulunabilecek güvenlik seçeneklerinden uygun olanları seçiniz."),
+                view(security),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Analitik",
+                    "Uygulamanızın içerisinde bulunabilecek analitik seçeneklerinden uygun olanları seçiniz."),
+                view(analytics),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //
+                headerView("Diğer",
+                    "Uygulamanızın içerisinde bulunabilecek diğer seçeneklerden uygun olanları seçiniz."),
+                view(dateNLocation),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
               ],
             ),
           ),
@@ -44,6 +131,40 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  Widget headerView(text, subtext) {
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20), topLeft: Radius.circular(20)),
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.15,
+        width: MediaQuery.of(context).size.width * 0.8,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Color.fromRGBO(246, 231, 29, 1.0),
+          Color.fromRGBO(246, 231, 29, 1.0),
+          Color.fromRGBO(246, 231, 29, 1.0),
+          Colors.grey.shade200
+        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+              ),
+              Text(
+                subtext,
+                textAlign: TextAlign.center,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   ///////////////////
 
   Widget view(obj) {
@@ -56,15 +177,14 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.of(context).size.height * 0.15,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: Offset(0, 3),
               )
             ]),
             child: Card(
-              shadowColor: Colors.red,
-              color: Colors.green,
+              color: Color.fromRGBO(246, 231, 29, 1.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -73,17 +193,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       RawMaterialButton(
                         elevation: 3.0,
-                        fillColor: Colors.white,
+                        fillColor: Colors.black,
                         child: Icon(
                           obj[index].icon,
                           size: 35.0,
+                          color: Colors.white,
                         ),
                         padding: EdgeInsets.all(15.0),
                         shape: CircleBorder(),
                       ),
-                      Text(
-                        obj[index].name,
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.25,
+                        child: Center(
+                          child: Text(
+                            obj[index].name,
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
                       )
                     ],
                   ),
@@ -118,7 +245,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.of(context).size.height * 0.15,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: Offset(0, 3),
@@ -149,7 +276,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  Text(platform[index].text),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(platform[index].text)),
                   Switch(
                       value: platform[index].isSwitched,
                       onChanged: (value) {
@@ -179,7 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
             height: MediaQuery.of(context).size.height * 0.15,
             decoration: BoxDecoration(boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Colors.grey.withOpacity(0.1),
                 spreadRadius: 1,
                 blurRadius: 1,
                 offset: Offset(0, 3),
@@ -207,10 +336,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(
                         appSize[index].name,
                         style: TextStyle(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
                       )
                     ],
                   ),
-                  Text(appSize[index].text),
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: Text(appSize[index].text)),
                   Switch(
                       value: appSize[index].isSwitched,
                       onChanged: (value) {

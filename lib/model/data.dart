@@ -37,11 +37,23 @@ class AppSize {
 
   static List<AppSize> getAppSize() => [
         AppSize(
-            "Küçük", 1.1, "Text text text text", FontAwesomeIcons.home, false),
+            "Küçük",
+            1.1,
+            "Giriş sayfaları ve özellik içermeyen sayfalar hariç 3-5 sayfa",
+            FontAwesomeIcons.home,
+            false),
         AppSize(
-            "Orta", 1.3, "Text text text text", FontAwesomeIcons.home, false),
+            "Orta",
+            1.3,
+            "Giriş sayfaları ve özellik içermeyen sayfalar hariç 6-0 sayfa",
+            FontAwesomeIcons.home,
+            false),
         AppSize(
-            "Büyük", 1.5, "Text text text text", FontAwesomeIcons.home, false),
+            "Büyük",
+            1.5,
+            "Giriş sayfaları ve özellik içermeyen sayfalar hariç 10-15 sayfa",
+            FontAwesomeIcons.home,
+            false),
       ];
 }
 
@@ -57,8 +69,14 @@ class UserInterface {
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
   static List<UserInterface> getUserInterface() => [
-        UserInterface("MacOS", 2000, 20, "Text text text text",
-            FontAwesomeIcons.apple, false),
+        UserInterface("Prototip", 750, 20, "Text text text text",
+            Icons.filter_1_rounded, false),
+        UserInterface("Basit", 1500, 40, "Text text text text",
+            Icons.filter_2_rounded, false),
+        UserInterface("StartUp", 2500, 72, "Text text text text",
+            Icons.filter_3_rounded, false),
+        UserInterface("Profesyonel", 4000, 100, "Text text text text",
+            Icons.filter_4_rounded, false),
       ];
 }
 
@@ -79,7 +97,7 @@ class Authentication {
         Authentication("Facebook", 500, 5, "Text text text text",
             FontAwesomeIcons.facebook, false),
         Authentication("Twitter", 500, 5, "Text text text text",
-            FontAwesomeIcons.twitch, false),
+            FontAwesomeIcons.twitter, false),
         Authentication("Google", 500, 5, "Text text text text",
             FontAwesomeIcons.google, false),
         Authentication("LinkedIn", 500, 5, "Text text text text",
@@ -148,15 +166,23 @@ class Billing {
   int cost;
   int hours;
   String text;
-  Icondata icon;
+  IconData icon;
   bool isSwitched;
 
   Billing(
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
   static List<Billing> getBilling() => [
+        Billing("Abonelik", 1200, 20, "Text text text text", Icons.subscript,
+            false),
         Billing(
-            "Abonelik", 1200, 20, "Text text text text", Icons.subscript, false)
+            "Ödeme", 2000, 40, "Text text text text", Icons.credit_card, false),
+        Billing("Alışveriş Sepeti", 2000, 35, "Text text text text",
+            Icons.shopping_cart, false),
+        Billing("Satış Yeri", 2500, 50, "Text text text text",
+            Icons.shopping_bag, false),
+        Billing("Uygulama İçi Satın Alma", 1000, 20, "Text text text text",
+            Icons.shop, false),
       ];
 }
 
@@ -165,13 +191,20 @@ class Connection {
   int cost;
   int hours;
   String text;
-  FontAwesomeIcons icon;
+  IconData icon;
   bool isSwitched;
 
   Connection(
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
-  static List<Connection> getConnection() => [];
+  static List<Connection> getConnection() => [
+        Connection("Cihaz Bağlama", 1000, 20, "Text text text text",
+            Icons.connect_without_contact, false),
+        Connection("Bildirim", 1000, 20, "Text text text text",
+            Icons.notifications, false),
+        Connection("Eşzamanlı Veritabanı", 2500, 50, "Text text text text",
+            FontAwesomeIcons.database, false),
+      ];
 }
 
 class Security {
@@ -179,13 +212,18 @@ class Security {
   int cost;
   int hours;
   String text;
-  FontAwesomeIcons icon;
+  IconData icon;
   bool isSwitched;
 
   Security(
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
-  static List<Security> getSecurity() => [];
+  static List<Security> getSecurity() => [
+        Security("SSL", 2250, 30, "Text text text text", FontAwesomeIcons.lock,
+            false),
+        Security("İki Aşamalı Doğrulama", 1250, 20, "Text text text text",
+            FontAwesomeIcons.key, false),
+      ];
 }
 
 class Analytics {
@@ -193,13 +231,24 @@ class Analytics {
   int cost;
   int hours;
   String text;
-  FontAwesomeIcons icon;
+  IconData icon;
   bool isSwitched;
 
   Analytics(
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
-  static List<Analytics> getAnalytics() => [];
+  static List<Analytics> getAnalytics() => [
+        Analytics("Admin", 1250, 20, "text text text text",
+            Icons.admin_panel_settings, false),
+        Analytics("Çoklu Dil", 1250, 20, "text text text text", Icons.language,
+            false),
+        Analytics("Reklam", 1250, 20, "text text text text",
+            FontAwesomeIcons.ad, false),
+        Analytics("Kullanıcı Analitiği", 1250, 20, "text text text text",
+            Icons.analytics, false),
+        Analytics("Performans Görüntüleme", 1250, 20, "text text text text",
+            Icons.speed, false),
+      ];
 }
 
 class Others {
@@ -207,11 +256,31 @@ class Others {
   int cost;
   int hours;
   String text;
-  FontAwesomeIcons icon;
+  IconData icon;
   bool isSwitched;
 
   Others(
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
-  static List<Others> getOthers() => [];
+  static List<Others> getOthers() => [
+        Others("Mevsim", 750, 8, "Text text text text",
+            FontAwesomeIcons.cloudSunRain, false),
+        Others(
+            "Checklist", 750, 8, "Text text text text", Icons.check_box, false),
+        Others("Medya Oynatıcı", 1250, 30, "Text text text text",
+            Icons.perm_media, false),
+        Others("Fitness", 2000, 60, "Text text text text", Icons.fitness_center,
+            false),
+        Others("Fotoğraf Galerisi", 750, 10, "Text text text text",
+            Icons.photo_album, false),
+        Others("Anket", 750, 10, "Text text text text", Icons.question_answer,
+            false),
+        Others("Randevu", 2250, 40, "Text text text text", Icons.date_range,
+            false),
+        Others("QR Karekod", 1750, 40, "Text text text text",
+            FontAwesomeIcons.qrcode, false),
+        Others("Kamera", 600, 10, "Text text text text", Icons.camera, false),
+        Others("Bluetooth", 950, 15, "Text text text text",
+            FontAwesomeIcons.bluetooth, false),
+      ];
 }
