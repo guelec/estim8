@@ -13,16 +13,41 @@ class Platform {
       this.name, this.cost, this.hours, this.text, this.icon, this.isSwitched);
 
   static List<Platform> getPlatform() => [
-        Platform("iOS", 2000, 20, "Text text text text", FontAwesomeIcons.apple,
+        Platform(
+            "iOS",
+            2000,
+            20,
+            "iOS işletim sistemli cihazlara (iPhone ve iPad) uygulama çıkartmak için.",
+            FontAwesomeIcons.apple,
             false),
-        Platform("Android", 1500, 20, "Text text text text",
-            FontAwesomeIcons.android, false),
-        Platform("Web", 2000, 20, "Text text text text",
-            FontAwesomeIcons.internetExplorer, false),
-        Platform("Windows", 1500, 20, "Text text text text",
-            FontAwesomeIcons.windows, false),
-        Platform("MacOS", 2000, 20, "Text text text text",
-            FontAwesomeIcons.apple, false),
+        Platform(
+            "Android",
+            1500,
+            20,
+            "Android işletim sistemli cihazlara (Telefon ve Tablet) uygulama çıkartmak için",
+            FontAwesomeIcons.android,
+            false),
+        Platform(
+            "Web",
+            2000,
+            20,
+            "Web tarayıcısı uyumlu internet uygulamaları çıkartmak için",
+            FontAwesomeIcons.internetExplorer,
+            false),
+        Platform(
+            "Windows",
+            1500,
+            20,
+            "Windows işletim sistemli cihazlara (Tablet ve Bilgisayar) masaüstü uygulaması çıkartmak için",
+            FontAwesomeIcons.windows,
+            false),
+        Platform(
+            "MacOS",
+            2000,
+            20,
+            "MacOS işletim sistemli cihazlara (Macbook ve iMac) masaüstü uygulaması çıkartmak için",
+            FontAwesomeIcons.apple,
+            false),
       ];
 }
 

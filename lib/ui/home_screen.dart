@@ -1,5 +1,6 @@
 import 'package:estim8/model/data.dart';
 import 'package:estim8/model/user.dart';
+import 'package:estim8/ui/calculate.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -24,19 +25,35 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Security> security = Security.getSecurity();
   List<Analytics> analytics = Analytics.getAnalytics();
   List<Others> others = Others.getOthers();
-
+  int uICost = 0;
+  int uITime = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        title: Text("Maliyet ve Zaman Hesabı"),
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           physics: ScrollPhysics(),
           child: Container(
-            color: Colors.grey.withOpacity(0.1),
+            decoration: BoxDecoration(color: Colors.black.withOpacity(0.1)),
             child: Column(
               children: [
                 //
-                Text("Project Cost = ${project.cost}Lira"),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.025,
+                  color: Colors.transparent,
+                ),
+                leadCard(),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                //Text("Project Cost = ${project.cost} Lira"),
+                //Text("Project Time = ${project.hours} Hours"),
+
                 headerView("Platform",
                     "Uygulamanızı yayınlayacağınız platformları seçiniz."),
                 platformView(),
@@ -119,12 +136,51 @@ class _HomeScreenState extends State<HomeScreen> {
                 //
                 headerView("Diğer",
                     "Uygulamanızın içerisinde bulunabilecek diğer seçeneklerden uygun olanları seçiniz."),
-                view(dateNLocation),
+                view(others),
+                Divider(
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  color: Colors.transparent,
+                ),
+                OutlinedButton(
+                  child: Text(
+                    "Hesapla",
+                    style: TextStyle(fontSize: 20.0, color: Colors.black),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Calculate(
+                            project: project, uICost: uICost, uITime: uITime),
+                      ),
+                    );
+                  },
+                ),
                 Divider(
                   height: MediaQuery.of(context).size.height * 0.05,
                   color: Colors.transparent,
                 ),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget leadCard() {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.2,
+        color: Color.fromRGBO(246, 231, 29, 1.0),
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              "Şimdi mobil uygulamanda var olacak veya olmasını düşündüğün yazılımsal modülleri seç, sen seçimlerini yaparken ben birazcık matematik hesabı yapıyor olacağım.",
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -140,12 +196,8 @@ class _HomeScreenState extends State<HomeScreen> {
         height: MediaQuery.of(context).size.height * 0.15,
         width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Color.fromRGBO(246, 231, 29, 1.0),
-          Color.fromRGBO(246, 231, 29, 1.0),
-          Color.fromRGBO(246, 231, 29, 1.0),
-          Colors.grey.shade200
-        ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
+          color: Color.fromRGBO(246, 231, 29, 1.0),
+        ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -175,16 +227,18 @@ class _HomeScreenState extends State<HomeScreen> {
         itemBuilder: (BuildContext context, int index) {
           return Container(
             height: MediaQuery.of(context).size.height * 0.15,
-            decoration: BoxDecoration(boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: Offset(0, 3),
-              )
-            ]),
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            //  decoration: BoxDecoration(boxShadow: [
+            //    BoxShadow(
+            ///      color: Colors.grey.withOpacity(0.1),
+            //      spreadRadius: 1,
+            //      blurRadius: 1,
+            //      offset: Offset(0, 3),
+            //    )
+            //  ]),
             child: Card(
               color: Color.fromRGBO(246, 231, 29, 1.0),
+              shadowColor: Colors.grey,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -216,14 +270,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   Text(obj[index].text),
                   Switch(
+                      activeColor: Colors.black,
                       value: obj[index].isSwitched,
                       onChanged: (value) {
                         setState(() {
                           obj[index].isSwitched = value;
                           if (value == true) {
+                            if (obj[index].name == "Prototip" ||
+                                obj[index].name == "Basit" ||
+                                obj[index].name == "StartUp" ||
+                                obj[index].name == "Profesyonel") {
+                              uICost = obj[index].cost;
+                              uITime = obj[index].hours;
+                            }
                             project.cost += obj[index].cost;
+                            project.hours += obj[index].hours;
                           } else {
                             project.cost -= obj[index].cost;
+                            project.hours -= obj[index].hours;
                           }
                         });
                       })
@@ -252,8 +316,8 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ]),
             child: Card(
-              shadowColor: Colors.red,
-              color: Colors.green,
+              shadowColor: Colors.grey,
+              color: Color.fromRGBO(246, 231, 29, 1.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -262,10 +326,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       RawMaterialButton(
                         elevation: 3.0,
-                        fillColor: Colors.white,
+                        fillColor: Colors.black,
                         child: Icon(
                           platform[index].icon,
                           size: 35.0,
+                          color: Colors.white,
                         ),
                         padding: EdgeInsets.all(15.0),
                         shape: CircleBorder(),
@@ -280,6 +345,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: Text(platform[index].text)),
                   Switch(
+                      activeColor: Colors.black,
                       value: platform[index].isSwitched,
                       onChanged: (value) {
                         setState(() {
@@ -315,8 +381,8 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ]),
             child: Card(
-              shadowColor: Colors.red,
-              color: Colors.green,
+              shadowColor: Colors.grey,
+              color: Color.fromRGBO(246, 231, 29, 1.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -325,9 +391,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       RawMaterialButton(
                         elevation: 3.0,
-                        fillColor: Colors.white,
+                        fillColor: Colors.black,
                         child: Icon(
                           appSize[index].icon,
+                          color: Colors.white,
                           size: 35.0,
                         ),
                         padding: EdgeInsets.all(15.0),
@@ -344,6 +411,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: MediaQuery.of(context).size.width * 0.4,
                       child: Text(appSize[index].text)),
                   Switch(
+                      activeColor: Colors.black,
                       value: appSize[index].isSwitched,
                       onChanged: (value) {
                         setState(() {

@@ -8,6 +8,6 @@ class Project {
     this.name = null;
     this.cost = 0.0;
     this.hours = 0;
-    this.days = 0;
+    this.days = (hours / 24).toInt();
   }
 }

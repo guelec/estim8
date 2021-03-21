@@ -1,3 +1,4 @@
+import 'package:estim8/ui/get_started.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 
@@ -8,7 +9,7 @@ class SplashScreenWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SplashScreen(
       seconds: 1,
-      navigateAfterSeconds: HomeScreen(),
+      navigateAfterSeconds: GetStarted(),
     );
   }
 }
