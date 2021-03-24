@@ -1,7 +1,7 @@
-# estim8
+# ESTIM8
 
-A new Flutter project.
+ESTIM8 id designed for Vakifbank Hack to The Future event. It is a cost and time estimator for software solutions.
 
-## Getting Started
+## Preview
 
 ![ESTIM8](https://media.giphy.com/media/riHyShDdIWzPeEc38v/giphy.gif)
